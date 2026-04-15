@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>LUXE — Premium Shopping</title>
+</head>
+
+<body>
+    <!-- Alert -->
+    <div id="alert" aria-live="assertive"
+        class="alert fixed top-5 left-1/2 transform -translate-x-1/2 bg-(--accent) text-(--bg) px-6 py-3 rounded-lg shadow-lg opacity-0 transition duration-300 z-9999">
+    </div>
+    <!-- Navbar -->
+    <header class="header z-999 bg-(--bg) sticky top-0 shadow-xl" id="header">
+        <div class="header-inner container h-20 flex items-center justify-between">
+
+            <!-- Logo -->
+            <a href="#" class="logo text-3xl font-bold" id="nav-home">LUXE</a>
+
+            <!-- Desktop Nav -->
+            <nav class="fixed top-20 left-0 w-full p-6 bg-(--bg)
+  flex flex-col items-center gap-8
+  transform -translate-x-full transition-transform duration-300
+  lg:static lg:translate-x-0 lg:flex-row lg:p-0 lg:w-auto" id="nav-links">
+
+                <ul class="flex flex-col lg:flex-row items-center gap-8">
+
+                    <li>
+                        <a href="#home" id="Home" data-page="home"
+                            class="nav-link px-3 py-1 rounded-lg transition duration-300 hover:bg-(--accent-light) hover:text-(--accent) focus:outline-none focus:ring-2 focus:ring-(--accent)"
+                            aria-current="page">
+                            Home
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#products" id="Shop" data-page="products"
+                            class="nav-link px-3 py-1 rounded-lg transition duration-300 hover:bg-(--accent-light) hover:text-(--accent) focus:outline-none focus:ring-2 focus:ring-(--accent)">
+                            Shop
+                        </a>
+                    </li>
+
+                    <li class="relative">
+                        <a href="#wishlist" id="Wishlist" data-page="wishlist"
+                            class="nav-link px-3 py-1 rounded-lg transition duration-300 hover:bg-(--accent-light) hover:text-(--accent) focus:outline-none focus:ring-2 focus:ring-(--accent)">
+                            Wishlist
+                            <span
+                                class="badge hidden absolute -top-2 -right-2 text-xs bg-(--red) text-white rounded-full px-1"
+                                id="wishlist-badge">0</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <div class="search-wrap relative lg:block w-64">
+                            <label for="search-input" class="sr-only">Search products</label>
+
+                            <input type="search" id="search-input" placeholder="Search products…" autocomplete="off"
+                                class="w-full bg-(--bg-alt) text-(--text) px-4 py-3 rounded-xl border-none focus:outline-(--accent) focus:ring-2 focus:ring-(--accent)"
+                                aria-describedby="search-hint" />
+                            <button type="submit"
+                                class="search-btn min-w-[48px] min-h-[48px] p-3 absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-(--accent) focus:outline-none focus:ring-2 focus:ring-(--accent)"
+                                aria-label="Search products" aria-controls="search-results">
+
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" aria-hidden="true" focusable="false">
+
+                                    <circle cx="11" cy="11" r="8" />
+                                    <path d="M21 21l-4.35-4.35" />
+                                </svg>
+
+                            </button>
+                            <div id="search-results"
+                                class="search-dropdown absolute left-0 top-full w-full bg-(--bg) shadow-lg rounded-lg mt-2 hidden max-h-60 overflow-y-auto z-[9999]">
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Header actions -->
+            <div class="header-actions flex items-center gap-8">
+                <!-- Dark mode toggle -->
+                <button
+                    class="icon-btn size-10 rounded-lg flex items-center justify-center hover:bg-(--bg-alt) hover:text-(--accent)"
+                    id="theme-toggle" aria-label="Toggle dark mode">
+                    <svg class="icon-sun block" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5" />
+                        <line x1="12" y1="1" x2="12" y2="3" />
+                        <line x1="12" y1="21" x2="12" y2="23" />
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                        <line x1="1" y1="12" x2="3" y2="12" />
+                        <line x1="21" y1="12" x2="23" y2="12" />
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+                    </svg>
+                    <svg class="icon-moon hidden" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                    </svg>
+                </button>
+                <!-- Auth -->
+                <button
+                    class="icon-btn size-10 rounded-lg flex items-center justify-center hover:bg-(--bg-alt) hover:text-(--accent)"
+                    id="auth-btn" aria-label="Auth">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                        <circle cx="12" cy="7" r="4" />
+                    </svg>
+                </button>
+                <!-- Cart -->
+                <button
+                    class="nav-link relative px-3 py-1 rounded-lg transition duration-300 hover:bg-(--accent-light) hover:text-(--accent) focus:outline-none focus:ring-2 focus:ring-(--accent)"
+                    id="cart-icon-btn" data-page="cart" aria-label="Cart Page">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+                        <line x1="3" y1="6" x2="21" y2="6" />
+                        <path d="M16 10a4 4 0 0 1-8 0" />
+                    </svg>
+                    <span
+                        class="cart-count hidden absolute -top-2 -right-2 text-xs bg-(--red) text-white rounded-full px-1"
+                        id="cart-count">0</span>
+                </button>
+            </div>
+            <!-- Hamburger (mobile) -->
+            <button class="hamburger lg:hidden flex flex-col gap-1" id="hamburger">
+                <span class="w-7 h-[4px] bg-(--accent) transition-all duration-300 rounded-xl "></span><span
+                    class="w-7 h-[4px] bg-(--accent) transition-all duration-300 rounded-xl"></span><span
+                    class="w-7 h-[4px] bg-(--accent) transition-all duration-300 rounded-xl"></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Register & Sign in -->
+    <div class="overlay size-full hidden transition duration-300 ease-(--tr) fixed inset-0 backdrop-blur-xs z-9999 bg-[rgba(0,0,0,.5)] flex justify-center items-center "
+        id="auth-overlay">
+        <div id="auth-modal" role="dialog" aria-modal="true" aria-labelledby="auth-title"
+            class="modal hidden rounded-lg transition duration-4000 ease-(--tr) relative w-1/3 sm:w-1/2 md:w-1/2 h-min p-9 bg-(--bg-card)">
+            <button class="modal-close absolute top-3 right-5 text-2xl hover:text-(--red)" id="auth-close"
+                aria-label="Close">&times;</button>
+            <div class="auth-tabs flex text-center border-b  border-(--border) mb-5">
+                <button class="auth-tab w-1/2 active" data-tab="login">Sign In</button>
+                <button class="auth-tab w-1/2" data-tab="register">Register</button>
+            </div>
+
+
+            <!-- Login Form -->
+            <div id="tab-login" class="auth-panel active">
+                <h2 class="modal-title text-3xl pt-3">Welcome Back</h2>
+                <p class="modal-sub text-(--text-light) py-3">Sign in to your LUXE account</p>
+                <div class="form-group">
+                    <label for="login-email" class="block pb-2">Email</label>
+                    <input type="email"
+                        class="w-full bg-[var(--bg-alt)] text-(--text) pl-5 py-1 rounded-xl outline-none border-none focus:ring-2 focus:ring-(--accent)"
+                        id="login-email" placeholder="you@example.com" autocomplete="email" />
+                </div>
+                <div class="form-group">
+                    <label for="login-password" class="block py-2">Password</label>
+                    <input type="password"
+                        class="w-full bg-[var(--bg-alt)] text-(--text) pl-5 py-1 rounded-xl outline-none border-none focus:ring-2 focus:ring-(--accent)"
+                        id="login-password" placeholder="••••••••" autocomplete="current-password" />
+                </div>
+                <button class="btn btn-primary btn-full w-full bg-(--accent) rounded-3xl my-3 py-2 text-(--bg-card)"
+                    id="login-btn">Sign In</button>
+                <p class="auth-switch text-center">Don't have an account? <a href="#"
+                        class="text-(--accent) font-medium" id="log-tab" data-tab="register">Register</a></p>
+            </div>
+
+            <!-- Register Form -->
+            <div id="tab-register" class="auth-panel hidden">
+                <h2 class="modal-title text-3xl pt-3">Create Account</h2>
+                <p class="modal-sub text-(--text-light) py-3">Join LUXE for exclusive offers</p>
+                <div class="form-group">
+                    <label for="reg-name" class="block pb-2">Full Name</label>
+                    <input type="text"
+                        class="w-full bg-[var(--bg-alt)] text-(--text) pl-5 py-1 rounded-xl outline-none border-none focus:ring-2 focus:ring-(--accent)"
+                        id="reg-name" placeholder="Jane Doe" autocomplete="name" />
+                </div>
+                <div class="form-group">
+                    <label for="reg-email" class="block py-2">Email</label>
+                    <input type="email"
+                        class="w-full bg-[var(--bg-alt)] text-(--text) pl-5 py-1 rounded-xl outline-none border-none focus:ring-2 focus:ring-(--accent)"
+                        id="reg-email" placeholder="you@example.com" required autocomplete="email" />
+                </div>
+                <div class="form-group">
+                    <label for="reg-password" class="block py-2">Password</label>
+                    <input type="password"
+                        class="w-full bg-[var(--bg-alt)] text-(--text) pl-5 py-1 rounded-xl outline-none border-none focus:ring-2 focus:ring-(--accent)"
+                        id="reg-password" placeholder="Min 6 characters" autocomplete="new-password" />
+                </div>
+                <button class="btn btn-primary btn-full w-full bg-(--accent) rounded-3xl my-3 py-2 text-(--bg-card)"
+                    id="register-btn">Create Account</button>
+                <p class="auth-switch text-center">Already have an account? <a href="#"
+                        class="text-(--accent) font-medium" id="reg-tab" data-tab="login">Sign
+                        In</a>
+                </p>
+            </div>
+            <!-- Error -->
+            <div class="text-center text-red-500 mt-2" id="Error"></div>
+
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <main>
+        <section class="Home-Page" id="Home-Page">
+            <section class="hero w-full h-105 sm:max-h-max lg:h-105 md:h-105 py-5" id="Hero">
+                <div class="container h-full flex items-center justify-between">
+                    <div class="hero-content text-center z-1 w-full">
+                        <span
+                            class="hero-eyebrow p-3 bg-[#c8953a33] border-1 border-(--accent) rounded-3xl text-(--accent) ">New
+                            Season 2025</span>
+                        <h1 class="text-5xl font-bold my-4 text-(--bg)">Discover <span
+                                class="text-(--accent)">Luxury</span>
+                            Like Never Before</h1>
+                        <p class="text-(--text-muted) text-lg mb-6">Shop the finest selection of premium products at
+                            LUXE.
+                            Indulge in
+                            elegance and style with our curated collection.</p>
+                        <a href="#" class="btn btn-primary bg-(--accent) rounded-3xl py-3 px-6 text-(--bg-card)">Shop
+                            Now</a>
+                    </div>
+                </div>
+            </section>
+            <!-- Shop category -->
+            <section class="Shop-Category pt-120 pb-20" id="Shop-Category">
+                <div class="container">
+                    <div class="section-header flex items-center justify-between flex-wrap mb-12">
+                        <h2 class="text-3xl">Shop by Category</h2>
+                        <p class="text-(--text-muted)">Find exactly what you're looking for</p>
+                    </div>
+                    <div class="categories-grid w-full place-items-center text-center  gap-8">
+                        <div class="category-card w-full rounded-xl transition duration-300 border-2 border-(--border) p-6 cursor-pointer hover:border-(--accent) hover:-translate-y-2 hover:shadow-xl"
+                            data-page="products" data-filter="Electronics">
+                            <span class="text-3xl">💻</span>
+                            <h3 class="font-semibold">Electronics</h3>
+                            <p class="text-(--text-muted)">4 itmes</p>
+                        </div>
+                        <div class="category-card w-full rounded-xl transition duration-300 border-2 border-(--border) p-6 cursor-pointer hover:border-(--accent) hover:-translate-y-2 hover:shadow-xl"
+                            data-page="products" data-filter="Electronics">
+                            <span class="text-3xl">👗</span>
+                            <h3 class="font-semibold">Fashion</h3>
+                            <p class="text-(--text-muted)">12 items</p>
+                        </div>
+                        <div class="category-card w-full rounded-xl transition duration-300 border-2 border-(--border) p-6 cursor-pointer hover:border-(--accent) hover:-translate-y-2 hover:shadow-xl"
+                            data-page="products" data-filter="Electronics">
+                            <span class="text-3xl">🏠</span>
+                            <h3 class="font-semibold">Home & Kitchen</h3>
+                            <p class="text-(--text-muted)">8 items</p>
+                        </div>
+                        <div class="category-card w-full rounded-xl transition duration-300 border-2 border-(--border) p-6 cursor-pointer hover:border-(--accent) hover:-translate-y-2 hover:shadow-xl"
+                            data-page="products" data-filter="Electronics">
+                            <span class="text-3xl">✨</span>
+                            <h3 class="font-semibold">Beauty & Wellness</h3>
+                            <p class="text-(--text-muted)">6 items</p>
+                        </div>
+                        <div class="category-card w-full rounded-xl transition duration-300 border-2 border-(--border) p-6 cursor-pointer hover:border-(--accent) hover:-translate-y-2 hover:shadow-xl"
+                            data-page="products" data-filter="Electronics">
+                            <span class="text-3xl">🏃</span>
+                            <h3 class="font-semibold">Sports & Outdoors</h3>
+                            <p class="text-(--text-muted)">10 items</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- information section -->
+            <section class="Information py-20" id="Information">
+                <div class="container">
+                    <div class="info-cards">
+                        <div
+                            class="info-card rounded-xl w-full lg:col-span-2 md:col-span-2 bg-[linear-gradient(135deg,#1a1714_30%,#3d2e1c)] text-(--bg) py-10 px-10 flex flex-col items-start justify-center gap-2">
+                            <span class="bg-[rgba(255,255,255,0.15)] px-4 text-white rounded-2xl">Limited Time</span>
+                            <h2 class="text-3xl text-white">Up To 40% Off <br> Electronics</h2>
+                            <button class="w-full rounded-full p-1 text-black bg-(--bg)">Shop now</button>
+                        </div>
+                        <div
+                            class="info-card rounded-xl w-full bg-[linear-gradient(135deg,#1c2a1a,#2a4a26)] text-(--bg) py-10 px-10 flex flex-col items-start justify-center gap-2">
+                            <span class="bg-[rgba(255,255,255,0.15)] px-4 text-white rounded-2xl">New Arrivals</span>
+                            <h2 class="text-3xl text-white">Fresh Styles Every Week</h2>
+                            <button class="w-full rounded-full p-1 text-black bg-(--bg)">Explore</button>
+                        </div>
+                        <div
+                            class="info-card  rounded-xl w-full bg-[linear-gradient(135deg,#1a1a2e,#2a2060)] text-(--bg) py-10 px-10 flex flex-col items-start justify-center gap-2">
+                            <span class="bg-[rgba(255,255,255,0.15)] px-4 text-white rounded-2xl">Members Only</span>
+                            <h2 class="text-3xl text-white">Free Shipping On $99+</h2>
+                            <button class="w-full rounded-full p-1 text-black bg-(--bg)">Shop now</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Customers Say Section -->
+            <section class="Customers-Say bg-(--bg-alt) py-20 " id="Customers-Say">
+                <div class="container">
+                    <h2 class="text-3xl font-semibold pb-5">What Our Customers Say</h2>
+                    <div class="info-cards">
+                        <div
+                            class="info-card h-70 bg-(--bg) rounded-xl p-6 border-2 border-(--border) hover:shadow-lg transition duration-300">
+                            <article>
+                                <ul class="stars flex justify-start gap-1">
+                                    <li>
+                                        <span class="star filled text-yellow-500">★</span>
+                                    </li>
+                                    <li>
+                                        <span class="star filled text-yellow-500">★</span>
+                                    </li>
+                                    <li>
+                                        <span class="star filled text-yellow-500">★</span>
+                                    </li>
+                                    <li>
+                                        <span class="star filled text-yellow-500">★</span>
+                                    </li>
+                                    <li>
+                                        <span class="star filled text-yellow-500">★</span>
+                                    </li>
+                                </ul>
+                                <p class="text-(--text-muted)">"Absolutely love my purchase! The quality exceeded my
+                                    expectations and shipping was incredibly fast. Will definitely shop here again."</p>
+                                <div class="customer flex items-center gap-4 mt-4">
+                                    <div
+                                        class="photo size-10 rounded-full flex items-center justify-center bg-(--accent-light) text-(--accent) overflow-hidden">
+                                        S
+                                    </div>
+                                    <div class="info">
+                                        <h3>Sarah M.</h3>
+                                        <p class="text-(--text-muted)">Verified Buyer</p>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+
+                        <div
+                            class="info-card h-70 bg-(--bg) rounded-xl p-6 border-2 border-(--border) hover:shadow-lg transition duration-300">
+                            <article>
+                                <ul class="stars flex justify-start gap-1">
+                                    <li>
+                                        <span class="star filled text-yellow-500">★</span>
+                                    </li>
+                                    <li>
+                                        <span class="star filled text-yellow-500">★</span>
+                                    </li>
+                                    <li>
+                                        <span class="star filled text-yellow-500">★</span>
+                                    </li>
+                                    <li>
+                                        <span class="star filled text-yellow-500">★</span>
+                                    </li>
+                                    <li>
+                                        <span class="star filled text-yellow-500">★</span>
+                                    </li>
+                                </ul>
+                                <p class="text-(--text-muted)">"Exceptional customer service and product quality. The
+                                    packaging
+                                    was beautiful and my item arrived in perfect condition."</p>
+                                <div class="customer flex items-center gap-4 mt-4">
+                                    <div
+                                        class="photo size-10 rounded-full flex items-center justify-center bg-(--accent-light) text-(--accent) overflow-hidden">
+                                        J
+                                    </div>
+                                    <div class="info">
+                                        <h3>James L.</h3>
+                                        <p class="text-(--text-muted)">Loyal Customer</p>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+
+                        <div
+                            class="info-card h-70 bg-(--bg) rounded-xl p-6 border-2 border-(--border) hover:shadow-lg transition duration-300">
+                            <article>
+                                <ul class="stars flex justify-start gap-1">
+                                    <li>
+                                        <span class="star filled text-yellow-500">★</span>
+                                    </li>
+                                    <li>
+                                        <span class="star filled text-yellow-500">★</span>
+                                    </li>
+                                    <li>
+                                        <span class="star filled text-yellow-500">★</span>
+                                    </li>
+                                    <li>
+                                        <span class="star filled text-yellow-500">★</span>
+                                    </li>
+                                </ul>
+                                <p class="text-(--text-muted)">Great selection and competitive prices. The website is so
+                                    easy to
+                                    navigate and checkout was a breeze."</p>
+                                <div class="customer flex items-center gap-4 mt-4">
+                                    <div
+                                        class="photo size-10 rounded-full flex items-center justify-center bg-(--accent-light) text-(--accent) overflow-hidden">
+                                        P
+                                    </div>
+                                    <div class="info">
+                                        <h3>Priya K.</h3>
+                                        <p class="text-(--text-muted)">Verified Buyer</p>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+
+                        <div
+                            class="info-card h-70 bg-(--bg) rounded-xl p-6 border-2 border-(--border) hover:shadow-lg transition duration-300">
+                            <article>
+                                <ul class="stars flex justify-start gap-1">
+                                    <li>
+                                        <span class="star filled text-yellow-500">★</span>
+                                    </li>
+                                    <li>
+                                        <span class="star filled text-yellow-500">★</span>
+                                    </li>
+                                    <li>
+                                        <span class="star filled text-yellow-500">★</span>
+                                    </li>
+                                    <li>
+                                        <span class="star filled text-yellow-500">★</span>
+                                    </li>
+                                </ul>
+                                </ul>
+                                <p class="text-(--text-muted)">"I'm blown away by the quality of the headphones I
+                                    ordered.
+                                    Noise
+                                    cancellation is unreal — best purchase I've made all year."</p>
+                                <div class="customer flex items-center gap-4 mt-4">
+                                    <div
+                                        class="photo size-10 rounded-full flex items-center justify-center bg-(--accent-light) text-(--accent) overflow-hidden">
+                                        O
+                                    </div>
+                                    <div class="info">
+                                        <h3>Omar F.</h3>
+                                        <p class="text-(--text-muted)">Verified Buyer</p>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <!-- Shop Page -->
+        <section class="Shop-Page bg-(--bg-alt) py-20 hidden" id="Shop-Page">
+            <div class="container flex justify-between flex-wrap">
+                <aside
+                    class="filters sm:w-full sm:static p-6 bg-(--bg) rounded-xl border-2 border-(--border) xl:sticky xl:w-1/4 sticky top-25 h-max">
+                    <h2 class="text-2xl font-semibold mb-4">Filter by Category</h2>
+                    <ul class="text-(--text-muted) border-b-2 border-(--border) mb-4 pb-4">
+                        <li class="hover:text -(--accent) transition duration-300">
+                            <label for="All-Products">
+                                <input type="radio" id="All-Products" name="category" value="All Products" class="mr-2">
+                                All Products
+                            </label>
+                        </li>
+                        <li class="hover:text -(--accent) transition duration-300">
+                            <label for="Electronics">
+                                <input type="radio" id="Electronics" name="category" value="Electronics" class="mr-2">
+                                Electronics
+                            </label>
+                        </li>
+                        <li class="hover:text -(--accent) transition duration-300">
+                            <label for="Fashion">
+                                <input type="radio" id="Fashion" name="category" value="Fashion" class="mr-2">
+                                Fashion
+                            </label>
+                        </li>
+                        <li class="hover:text -(--accent) transition duration-300">
+                            <label for="Home-Kitchen">
+                                <input type="radio" id="Home-Kitchen" name="category" value="Home & Kitchen"
+                                    class="mr-2">
+                                Home & Kitchen
+                            </label>
+                        </li>
+                        <li class="hover:text -(--accent) transition duration-300">
+                            <label for="Beauty-Wellness">
+                                <input type="radio" id="Beauty-Wellness" name="category" value="Beauty & Wellness"
+                                    class="mr-2">
+                                Beauty & Wellness
+                            </label>
+                        </li>
+                    </ul>
+                    <label for="Price-Range">Price Range</label><br>
+                    <input type="range" class="Price-Range w-full" name="Price" value="1000" id="Price-Range" min="0"
+                        max="1000" step="10">
+                    <div class="price-label flex justify-between text-sm mt-1">
+                        <span class="text-(--text-muted)">$0</span>
+                        <span class="text-(--accent)" id="Price">$1000</span>
+                    </div>
+                </aside>
+                <div class="cards w-200" id="cards">
+                    <h3 class="text-3xl font-semibold pb-5">Shop All Products</h3>
+                    <div class="products-grid w-full place-items-center gap-8" id="Products-grid">
+                        <!-- Product cards will be dynamically inserted here -->
+                    </div>
+                </div>
+            </div>
+            <div class="details bg-[rgba(0,0,0,.5)] size-full hidden transition duration-300 ease-(--tr) fixed inset-0 backdrop-blur-xs z-9999  flex justify-center items-center"
+                id="Details"></div>
+        </section>
+
+        <!-- Wishlist Page -->
+        <section class="Wishlist-Page bg-(--bg-alt) py-20 hidden" id="Wishlist-Page">
+            <div class="container">
+                <h2 class="text-3xl font-semibold pb-5">My Wishlist</h2>
+                <div class="products-grid w-full place-items-center gap-8" id="Wishlist-grid">
+                    <!-- Wishlist items will be dynamically inserted here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Cart Page -->
+        <section class="Cart-Page bg-(--bg-alt) py-20 hidden" id="Cart-Page">
+            <div class="container">
+                <h2 class="text-3xl font-semibold pb-5">My Cart</h2>
+                <div class="flex flex-col lg:flex-row gap-10">
+                    <div class="cart-items flex-col w-full place-items-center gap-8" id="Cart-grid">
+                        <!-- Cart items will be dynamically inserted here -->
+                    </div>
+                    <aside class="flex items-center justify-center w-full ">
+                        <div class="cart-summary bg-(--bg) rounded-xl p-6 border-2 border-(--border) w-full mt-10">
+                            <h3 class="text-2xl font-semibold mb-4">Order Summary</h3>
+                            <p class="text-(--text-muted) mb-2">Subtotal: <span id="Subtotal">00.00</span></p>
+                            <p class="text-(--text-muted) mb-2">Shipping: <span id="Shipping">00.00</span></p>
+                            <p class="text-(--text-muted) mb-4">Total: <span id="Total">00.00</span></p>
+                            <button
+                                class="w-full rounded-full p-3 text-white bg-(--accent) hover:bg-(--accent-dark) transition duration-300"
+                                id="CheckOut">Proceed
+                                to Checkout</button>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+
+        <!-- Checkout Overlay -->
+        <div class="checkout-overlay bg-[rgba(0,0,0,.5)] size-full hidden transition duration-300 ease-(--tr) fixed inset-0 backdrop-blur-xs z-9999  flex justify-center items-center"
+            id="Checkout-Overlay">
+
+            <div class="checkout-content relative bg-(--bg) rounded-xl p-6 border-2 border-(--border) w-full max-w-2xl">
+                <button class="modal-close absolute top-3 right-5 text-2xl hover:text-(--red)" id="checkout-close"
+                    aria-label="Close">&times;</button>
+                <h3 class="text-2xl font-semibold mb-4">Checkout</h3>
+                <form action="">
+                    <div class="form-group mb-4">
+                        <label for="full-name" class="block mb-2">Full Name</label>
+                        <input type="text"
+                            class="w-full bg-(--bg-alt) text-(--text) pl-5 py-1 rounded-xl outline-none border-none focus:ring-2 focus:ring-(--accent)"
+                            id="full-name" placeholder="Jane Doe" required autocomplete="name" />
+                    </div>
+                    <div class="form-group mb-4">
+                        <label for="email" class="block mb-2">Email</label>
+                        <input type="email"
+                            class="w-full bg-(--bg-alt) text-(--text) pl-5 py-1 rounded-xl outline-none border-none focus:ring-2 focus:ring-(--accent)"
+                            id="email" placeholder="john doe@example.com" required autocomplete="email" />
+                    </div>
+                    <div class="form-group mb-4">
+                        <label for="phone" class="block mb-2">Phone Number</label>
+                        <input type="tel"
+                            class="w-full bg-(--bg-alt) text-(--text) pl-5 py-1 rounded-xl outline-none border-none focus:ring-2 focus:ring-(--accent)"
+                            id="phone" placeholder="123-456-7890" required autocomplete="tel" />
+                    </div>
+                    <div class="form-group mb-4">
+                        <label for="address" class="block mb-2">Shipping Address</label>
+                        <input type="text"
+                            class="w-full bg-(--bg-alt) text-(--text) pl-5 py-1 rounded-xl outline-none border-none focus:ring-2 focus:ring-(--accent)"
+                            id="address" placeholder="123 Main St, City, Country" required
+                            autocomplete="street-address" />
+                    </div>
+                    <div class="form-group mb-4">
+                        <label for="payment" class="block mb-2">Payment Method</label>
+                        <select
+                            class="w-full bg-(--bg-alt) text-(--text) pl-5 py-1 rounded-xl outline-none border-none focus:ring-2 focus:ring-(--accent)"
+                            id="payment" required>
+                            <option value="" disabled selected>Select a payment method</option>
+                            <option value="credit-card">Credit Card</option>
+                            <option value="paypal">PayPal</option>
+                            <option value="Cash">Cash</option>
+                        </select>
+                    </div>
+                    <button
+                        class="w-full rounded-full p-3 text-white bg-(--accent) hover:bg-(--accent-dark) transition duration-300"
+                        id="PlaceOrder">Place Order</button>
+                </form>
+                <div class="text-center text-red-500 mt-2" id="Error-checkout"></div>
+            </div>
+        </div>
+
+        <!-- Footer Section -->
+        <footer class="pt-20">
+            <div class="container ">
+                <div class="info-cards pb-15 border-b-2 border-(--border)">
+                    <div class="info-card">
+                        <h2 class="text-2xl font-bold">LUXE</h2>
+                        <p class="text-(--text-muted)">Premium products, curated for those who demand the best. Shop
+                            with
+                            confidence.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3 class="pb-2 text-xl">Shop</h3>
+                        <ul class="text-(--text-muted)">
+                            <li class="hover:text-(--accent) transition duration-300"><a href="">All Products</a></li>
+                            <li class="hover:text-(--accent) transition duration-300"><a href="">Electronics</a></li>
+                            <li class="hover:text-(--accent) transition duration-300"><a href="">Home & Kitchen</a></li>
+                            <li class="hover:text-(--accent) transition duration-300"><a href="">Fashion</a></li>
+                        </ul>
+                    </div>
+                    <div class="info-card">
+                        <h3 class="pb-2 text-xl">Account</h3>
+                        <ul class="text-(--text-muted)">
+                            <li class="hover:text-(--accent) transition duration-300"><a href="">Sign In</a></li>
+                            <li class="hover:text-(--accent) transition duration-300"><a href="">Wishlist</a></li>
+                            <li class="hover:text-(--accent) transition duration-300"><a href="">Cart</a></li>
+                            <li class="hover:text-(--accent) transition duration-300"><a href="">Check Out</a></li>
+                        </ul>
+                    </div>
+                    <div class="info-card">
+                        <h3 class="pb-2 text-xl">Info</h3>
+                        <ul class="text-(--text-muted)">
+                            <li class="hover:text-(--accent) transition duration-300"><a href="">About Us</a></li>
+                            <li class="hover:text-(--accent) transition duration-300"><a href="">Contact</a></li>
+                            <li class="hover:text-(--accent) transition duration-300"><a href="">Privacy Policy</a></li>
+                            <li class="hover:text-(--accent) transition duration-300"><a href="">Returns</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <p class="text-center text-(--text-muted) py-5">&copy; 2025 LUXE. All rights reserved. Demo store — no
+                    real
+                    transactions.</p>
+            </div>
+        </footer>
+    </main>
+    <script src="index.js"></script>
+</body>
+
+</html>
