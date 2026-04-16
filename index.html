@@ -6,13 +6,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="shortcut icon" href="Assets/online-shopping-commerce-and-shopping-svgrepo-com.png" type="image/png">
     <title>LUXE — Premium Shopping</title>
+    <!-- Meta Description -->
+    <meta name="description"
+        content="Shop high-quality products at the best prices. Fast delivery, exclusive deals, and excellent customer service.">
+
+    <!-- SEO Robots -->
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph - Social Sharing -->
+    <meta property="og:title" content="Shop Now at Your Luxe Online Store">
+    <meta property="og:description"
+        content="Discover amazing products at great prices with fast shipping and exclusive offers. Shop now!">
+    <meta property="og:image" content="https://example.com/images//Luxe.jpg">
+    <meta property="og:url" content="https://omarhosny1.github.io/Luxe/">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Shop Now at Your Luxe Online Store">
+    <meta name="twitter:description"
+        content="Discover amazing products at great prices with fast shipping and exclusive offers. Shop now!">
+    <meta name="twitter:image" content="https://example.com/images//Luxe.jpg">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://omarhosny1.github.io/Luxe/" />
 </head>
 
 <body>
     <!-- Alert -->
     <div id="alert" aria-live="assertive"
-        class="alert fixed bottom-6 right-6 bg-(--accent) text-(--bg) px-6 py-3 rounded-lg shadow-lg opacity-0 transition duration-300 z-9999">
+        class="alert fixed bottom-6 right-6 transform  bg-(--accent) text-(--bg) px-6 py-3 rounded-lg shadow-lg opacity-0 transition duration-300 z-9999">
     </div>
     <!-- Navbar -->
     <header class="header z-999 bg-(--bg) sticky top-0 shadow-xl" id="header">
@@ -128,7 +153,7 @@
                 </button>
             </div>
             <!-- Hamburger  -->
-            <button class="hamburger lg:hidden flex flex-col gap-1" id="hamburger">
+            <button class="hamburger lg:hidden flex flex-col gap-1" id="hamburger" aria-label="hamburger button"> 
                 <span
                     class="hamburger-span w-7 h-[4px] bg-(--accent) transition-all duration-300 rounded-xl"></span><span
                     class="hamburger-span w-7 h-[4px] bg-(--accent) transition-all duration-300 rounded-xl"></span><span
