@@ -1009,9 +1009,9 @@ function loadCart() {
       </li>
 
       <li class="w-1/2">
-        <h3 class="font-semibold">${product.name}</h3>
+        <h3 class="text-(${isPurchased ? "--black" : "--text"}) font-semibold">${product.name}</h3>
         <p class="text-sm text-(--text-muted)">${product.category}</p>
-        <p class="font-bold">${product.price.toFixed(2)}</p>
+        <p class="text-(${isPurchased ? "--black" : "--text"}) font-bold">${product.price.toFixed(2)}</p>
         <p class="text-sm text-(--text-muted)"><del>${product.originalPrice}</del></p>
       </li>
 
@@ -1029,7 +1029,7 @@ function loadCart() {
               </button>
             `
             : `
-              <p class="text-green-600 font-semibold mt-3">✔ Purchased</p>
+              <p class="text-(--green) font-semibold mt-3">✔ Purchased</p>
             `
         }
 
