@@ -246,10 +246,19 @@ const homePage = document.getElementById("Home-Page");
 const shopPage = document.getElementById("Shop-Page");
 const wishlistPage = document.getElementById("Wishlist-Page");
 const cartPage = document.getElementById("Cart-Page");
+const ShopLink = document.getElementById("shop-link");
 const homeLink = document.getElementById("Home");
 const shopLink = document.getElementById("Shop");
 const wishlistLink = document.getElementById("Wishlist");
 const cartLink = document.getElementById("cart-icon-btn");
+ShopLink.addEventListener("click", () => {
+  homePage.classList.add("hidden");
+  cartPage.classList.add("hidden");
+  wishlistPage.classList.add("hidden");
+  shopPage.classList.remove("hidden");
+  homeLink.classList.remove("active");
+  shopLink.classList.add("active");
+});
 shopLink.addEventListener("click", () => {
   homePage.classList.add("hidden");
   cartPage.classList.add("hidden");
@@ -277,8 +286,10 @@ cartLink.addEventListener("click", () => {
 // Hamburger menu toggle
 const hamburger = document.getElementById("hamburger");
 const nav = document.getElementById("nav-links");
+const span = hamburger.querySelectorAll(".hamburger-span");
 
 hamburger.addEventListener("click", () => {
+  span.forEach((s) => s.classList.toggle("active"));
   nav.classList.toggle("-translate-x-full");
 });
 
@@ -335,6 +346,26 @@ searchInputDesktop.addEventListener("input", () => {
 
     displayResults(filtered, resultsContainerDesktop);
   }, 300);
+
+});
+
+// Choose product from search results
+resultsContainerDesktop.addEventListener("click", (e) => {
+  const item = e.target.closest(".flex");
+  if (!item) return;
+  const name = item.querySelector("p").textContent;
+  const product = PRODUCTS.find((p) => p.name === name);
+  if (product) {
+    homePage.classList.add("hidden");
+    cartPage.classList.add("hidden");
+    wishlistPage.classList.add("hidden");
+    shopPage.classList.remove("hidden");
+    homeLink.classList.remove("active");
+    shopLink.classList.add("active");
+    showProductDetails(product);
+    resultsContainerDesktop.classList.add("hidden");
+    searchInputDesktop.value = "";
+  }
 });
 
 // Theme toggle
@@ -402,8 +433,15 @@ const regEmail = document.getElementById("reg-email");
 const regPassword = document.getElementById("reg-password");
 const regbtn = document.getElementById("register-btn");
 const errorDiv = document.getElementById("Error");
-const logTab = document.querySelector("log-tab");
-const regTab = document.querySelector("reg-tab");
+const logTab = document.querySelector("#log-tab");
+const regTab = document.querySelector("#reg-tab");
+logTab.addEventListener("click", () => {
+  document.querySelector('[data-tab="register"]').click();
+});
+
+regTab.addEventListener("click", () => {
+  document.querySelector('[data-tab="login"]').click();
+});
 regbtn.addEventListener("click", (e) => {
   e.preventDefault();
 
@@ -691,12 +729,12 @@ productsGrid.addEventListener("click", (e) => {
 let selectedImage = null;
 function showProductDetails(product) {
   detailsModal.innerHTML = `
-        <div class="p-6 relative flex gap-6 w-1/2 bg-(--bg-card) rounded-lg">
+        <div class="Details-model p-6 relative flex sm:w-full  gap-6 lg:w-1/2 bg-(--bg-card) rounded-lg">
 
             <button id="details-close" class="absolute top-4 right-4"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
 
             <div class="w-full flex items-center justify-center flex-col">
-                <figure class="w-full overflow-hidden">
+                <figure class="w-full overflow-hidden rounded">
                     <img id="Img1" src="${product.images[0]}" alt="${product.name}" loading="lazy" class="w-full transition duration-300 group-hover:scale-110 object-cover">
                 </figure>
                 <div class="flex items-center gap-2 px-4 mt-2">
@@ -720,7 +758,7 @@ function showProductDetails(product) {
 
                 <p class="mb-2"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"></path></svg> ${product.rating} (${product.reviews})</p>
 
-                <ul class="mb-3">
+                <ul class="mb-3 mark" >
                     ${product.features.map((f) => `<li>✔ ${f}</li>`).join("")}
                 </ul>
 
@@ -755,12 +793,16 @@ detailsModal.addEventListener("click", (e) => {
 document.querySelectorAll('input[name="category"]').forEach((filter) => {
   filter.addEventListener("change", () => {
     const value = document.querySelector(
-      'input[name="category"]:checked',
+      'input[name="category"]:checked'
     ).value;
 
-    const filtered = value
-      ? PRODUCTS.filter((p) => p.category === value)
-      : PRODUCTS;
+    let filtered;
+
+    if (value === "All Products") {
+      filtered = PRODUCTS;
+    } else {
+      filtered = PRODUCTS.filter((p) => p.category === value);
+    }
 
     loadProducts(filtered);
   });
