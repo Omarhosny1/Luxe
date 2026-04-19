@@ -220,4 +220,13 @@ figure {
    .mark{
     display: none;
    }
+   .Cart-Page .container{
+    max-width: 100%;
+   }
+   .list-card{
+    width: 100%;
+   }
+   .list-card li{
+    width: 100%;
+   }
 }

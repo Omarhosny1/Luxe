@@ -48,9 +48,9 @@
 
             <!-- Desktop Nav -->
             <nav class="fixed top-20 left-0 w-full p-6 bg-(--bg)
-  flex flex-col items-center gap-8
-  transform -translate-x-full transition-transform duration-300
-  lg:static lg:translate-x-0 lg:flex-row lg:p-0 lg:w-auto" id="nav-links">
+                        flex flex-col items-center gap-8
+                        transform -translate-x-full transition-transform duration-300
+                        lg:static lg:translate-x-0 lg:flex-row lg:p-0 lg:w-auto" id="nav-links">
 
                 <ul class="flex flex-col lg:flex-row items-center gap-8">
 
@@ -153,7 +153,7 @@
                 </button>
             </div>
             <!-- Hamburger  -->
-            <button class="hamburger lg:hidden flex flex-col gap-1" id="hamburger" aria-label="hamburger button"> 
+            <button class="hamburger lg:hidden flex flex-col gap-1" id="hamburger" aria-label="hamburger button">
                 <span
                     class="hamburger-span w-7 h-[4px] bg-(--accent) transition-all duration-300 rounded-xl"></span><span
                     class="hamburger-span w-7 h-[4px] bg-(--accent) transition-all duration-300 rounded-xl"></span><span
@@ -193,8 +193,8 @@
                 </div>
                 <button class="btn btn-primary btn-full w-full bg-(--accent) rounded-3xl my-3 py-2 text-(--bg-card)"
                     id="login-btn">Sign In</button>
-                <p class="auth-switch text-center">Don't have an account? <button
-                        class="text-(--accent) font-medium" id="log-tab" data-tab="register">Register</button></p>
+                <p class="auth-switch text-center">Don't have an account? <button class="text-(--accent) font-medium"
+                        id="log-tab" data-tab="register">Register</button></p>
             </div>
 
             <!-- Register Form -->
@@ -221,8 +221,8 @@
                 </div>
                 <button class="btn btn-primary btn-full w-full bg-(--accent) rounded-3xl my-3 py-2 text-(--bg-card)"
                     id="register-btn">Create Account</button>
-                <p class="auth-switch text-center">Already have an account? <button
-                        class="text-(--accent) font-medium" id="reg-tab" data-tab="login">Sign
+                <p class="auth-switch text-center">Already have an account? <button class="text-(--accent) font-medium"
+                        id="reg-tab" data-tab="login">Sign
                         In</button>
                 </p>
             </div>
@@ -479,7 +479,8 @@
                     <ul class="text-(--text-muted) border-b-2 border-(--border) mb-4 pb-4">
                         <li class="hover:text -(--accent) transition duration-300">
                             <label for="All-Products">
-                                <input type="radio" checked id="All-Products" name="category" value="All Products" class="mr-2">
+                                <input type="radio" checked id="All-Products" name="category" value="All Products"
+                                    class="mr-2">
                                 All Products
                             </label>
                         </li>
@@ -571,7 +572,7 @@
                 <button class="modal-close absolute top-3 right-5 text-2xl hover:text-(--red)" id="checkout-close"
                     aria-label="Close">&times;</button>
                 <h3 class="text-2xl font-semibold mb-4">Checkout</h3>
-                <form action="">
+                <form action="" onsubmit="e.preventDefault()">
                     <div class="form-group mb-4">
                         <label for="full-name" class="block mb-2">Full Name</label>
                         <input type="text"

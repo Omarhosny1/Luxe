@@ -741,17 +741,17 @@ function showProductDetails(product) {
                 ${product.images
                   .map(
                     (img, index) => `
-      <figure onclick="selectImage('${img}')" class="w-1/2 overflow-hidden cursor-pointer border-2 border-(--border) rounded ${
-        index === 0 ? "border-(--accent)" : ""
-      }">
-        <img loading="lazy" src="${img}" alt="${product.name}" class="w-full h-full object-cover">
-      </figure>
-    `,
+                      <figure onclick="selectImage('${img}')" class="w-1/2 overflow-hidden cursor-pointer border-2 border-(--border) rounded ${
+                      index === 0 ? "border-(--accent)" : ""
+                    }">
+                    <img loading="lazy" src="${img}" alt="${product.name}" class="w-full h-full object-cover">
+                    </figure>
+                  `,
                   )
                   .join("")}
                 </div>
                 </div>
-            <div>
+                <div>
                 <h2 class="text-2xl font-bold mb-2">${product.name}</h2>
                 <p class="mb-2">${product.description}</p>
                 <p class="text-sm mb-2">Category: ${product.category}</p>
@@ -1001,7 +1001,7 @@ function loadCart() {
 
     const cartItem = `
     <ul data-index="${index}" 
-      class="flex items-center mb-3 gap-4 p-4 rounded-xl border-b-2 
+      class="list-card flex items-center mb-3 gap-4 p-4 rounded-xl border-b-2 
       ${isPurchased ? "bg-green-100 border-green-400" : "bg-(--bg) border-(--border)"}">
 
       <li class="w-1/4">
